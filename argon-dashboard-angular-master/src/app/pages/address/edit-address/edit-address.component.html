@@ -1,0 +1,110 @@
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+    <div class="container-fluid">
+        <div class="header-body">
+        </div>
+    </div>
+</div>
+<div class="container-fluid mt--7">
+    <div *ngIf="updated" class="alert alert-success alert-dismissible fade show" role="alert">
+        <span class="alert-icon"><i class="ni ni-like-2"></i></span>
+        <span class="alert-text"><strong>Success!</strong> Address Updated</span>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="close()">
+          <span aria-hidden="true">×</span>
+        </button>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header card-header-primary">
+                    <h4 class="card-title"><i>Edit your information<label class="card-category">(Some fields cannot be edit)</label></i></h4>
+                </div>
+                <div class="card-body">
+                    <form [formGroup]="addressForm" (submit)="save(addressForm.value)">
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="input-username">Name</label>
+                                    <input type="text" formControlName="name" id="input-username" class="form-control form-control-alternative" placeholder="contact name" value="{{address?.name}}">
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="input-email">Phone Number</label>
+                                    <input class="form-control form-control-alternative" formControlName="phone_number" placeholder="phone number" value="{{address?.phone_number}}">
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="input-first-name">Address Line 1</label>
+                                    <input type="text" class="form-control form-control-alternative" formControlName="address_line1" placeholder="line 1 (ex. street no., house no.)" value="{{address?.address_line1}}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="input-first-name">Addres Line 2</label>
+                                    <input type="text" class="form-control form-control-alternative" formControlName="address_line2" value="{{address?.address_line2}}">
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="input-last-name">City</label>
+                                    <div class="form-group">
+                                        <select formControlName="city" (change)="cityChange()">
+                                      <option  *ngFor="let c of citiesList" value="{{c.id}}">
+                                      {{ c.name | uppercase }}
+                                      </option>
+                                    </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="input-last-name">State</label>
+                                    <div class="form-group">
+                                        <select formControlName="state">
+                                      <option  *ngFor="let s of states" value="{{s.id}}">
+                                      {{ s.name | uppercase }}
+                                      </option>
+                                    </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="input-country">State</label>
+                                    <input type="number" id="input-postal-code" class="form-control form-control-alternative" placeholder="State" value="{{pincode}}">
+                                </div>
+                            </div> -->
+                        </div>
+                        <div class="row">
+
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="input-last-name">Pincode</label>
+                                    <input type="text" class="form-control form-control-alternative" formControlName="pincode" value="{{address?.pincode}}">
+
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="input-country">Country</label>
+                                    <input type="text" id="input-country" class="form-control form-control-alternative" placeholder="Country" value="India">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <button type="submit" class="btn btn-primary">Update</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="loading" *ngIf="loading">
+    <div class="loader"></div>
+</div>

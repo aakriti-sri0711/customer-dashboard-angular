@@ -1,0 +1,41 @@
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+    <div class="container-fluid">
+        <div class="header-body">
+            <!-- Card stats -->
+
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid mt--7">
+    <div class=" col-lg-8 card-wrapper">
+        <div class="employee card">
+            <div class=" card-header">
+                <h3 class=" mb-0">Employees</h3>
+            </div>
+            <div class=" card-body">
+                <div class=" row row-example">
+                    <div class="card employee-card col-sm-6 col-lg-6" *ngFor="let c of contacts">
+                        <div class=" card-body">
+                            <p>Employee ID:
+                                <span class=" heading-title text-warning mb-0">{{c.id}}</span>
+
+                            </p>
+                            <p>Name: {{c.name}}</p>
+                            <p>Phone Number: {{c.phone_number}}</p>
+                            <p *ngIf="c.role != null">Role: {{c.role}}</p>
+                            <span class="text-right"><a [routerLink]="'/employees/edit'"><mat-icon>edit</mat-icon>Edit</a></span>
+
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+
+
+
+    </div>
+</div>

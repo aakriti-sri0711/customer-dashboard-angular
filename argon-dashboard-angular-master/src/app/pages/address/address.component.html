@@ -1,0 +1,66 @@
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+    <div class="container-fluid">
+        <div class="header-body">
+
+        </div>
+    </div>
+</div>
+<!-- Page content -->
+<div class="container-fluid mt--7">
+    <!-- Table -->
+    <div class="row">
+        <div class="col">
+
+        </div>
+    </div>
+    <!-- Dark table -->
+    <div class="row mt-5">
+        <div class="col">
+            <div class="card bg-default shadow">
+                <div class="card-header bg-transparent border-0">
+                    <h3 class="text-white mb-0">Saved Address</h3>
+                </div>
+                <div class="table-responsive">
+                    <table class="table align-items-center table-dark table-flush">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">Address</th>
+                                <th scope="col">Edit</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let a of address">
+                                <th scope="row">
+                                    <div class="media align-items-center">
+
+                                        <div class="media-body">
+                                            <!-- <span class="mb-0 text-sm">Argon Design System</span> -->
+                                            <p><b>{{a?.name}}</b></p>
+                                            <p>{{a?.phone_number}}</p>
+                                            <p>{{a?.address_line1}}</p>
+                                            <p>{{a?.address_line2}}</p>
+
+
+
+                                        </div>
+                                    </div>
+                                </th>
+
+                                <td>
+                                    <!-- <span class="badge badge-dot mr-4">
+                      <i class="bg-warning"></i> View full address 
+                    </span> -->
+                                    <button type="button" class="btn btn-block btn-primary mb-3" style="width:33%" (click)="openDialog(a)">View full address</button>
+                                    <!-- <button type="button" class="btn btn-block btn-primary mb-3" style="width:33%" data-toggle="modal" data-target="#modal-default">View full address</button> -->
+                                </td>
+
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

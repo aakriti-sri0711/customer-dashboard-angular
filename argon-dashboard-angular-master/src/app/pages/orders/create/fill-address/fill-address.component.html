@@ -1,0 +1,75 @@
+<div class="header bg-primary pb-8 pt-5 pt-md-8">
+    <div class="container-fluid ">
+        <div class="header-body ">
+            <!-- Card stats -->
+
+        </div>
+    </div>
+</div>
+<div class="container-fluid mt--7">
+    <div class="card-wrapper">
+        <div class="card">
+            <!-- Card header -->
+            <div class="card-header">
+                <h3 class="mb-0">Address Information</h3>
+            </div>
+            <!-- Card body -->
+            <div class="card-body">
+                <form>
+                    <div class="form-group row">
+                        <label for="example-text-input" class="col-md-2 col-form-label form-control-label">Shipping Address</label>
+                        <div class="col-md-10">
+
+                            <div class="alert alert-secondary alert-dismissible fade show" role="alert" *ngIf="!remove">
+
+                                <span class="alert-text"><strong>{{shipping.name}},{{shipping.phone_number}}</strong></span>
+                                <p>{{shipping.address_line1}} {{shipping.address_line2}}, {{shipping.landmark}}, {{shipping.city}}, {{shipping.pincode}}</p>
+                                <button (click)="openShippingModal()" type="button" class="btn btn-outline-primary">
+                                     Change
+                                    </button>
+                            </div>
+                            <div class="alert alert-secondary alert-dismissible fade show" role="alert" *ngIf="remove">
+
+                                <span class="alert-text"><strong>{{paste.name}},{{paste.phone_number}}</strong></span>
+                                <p>{{paste.address_line1}} {{paste.address_line2}}, {{paste.landmark}}, {{paste.city}}, {{paste.pincode}}</p>
+                                <button (click)="openShippingModal()" type="button" class="btn btn-outline-primary">
+                                         Change
+                                        </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="example-text-input" class="col-md-2 col-form-label form-control-label">Billing Address</label>
+                        <div class="col-md-10">
+                            <!-- <div class="form-control" class="address_section"> {{billing.name}},{{billing.phone_number}},{{billing.address_line1}} {{billing.address_line2}}, {{billing.landmark}}, {{billing.city}}, {{billing.pincode}}
+                            </div> -->
+                            <div class="alert alert-secondary alert-dismissible fade show" role="alert" *ngIf="!removebilling">
+
+                                <span class="alert-text"><strong>{{billing.name}},{{billing.phone_number}}</strong></span>
+                                <p>{{billing.address_line1}} {{billing.address_line2}}, {{billing.landmark}}, {{billing.city}}, {{billing.pincode}}</p>
+                                <button (click)="openBillingModal()" type="button" class="btn btn-outline-primary">
+                                         Change
+                                        </button>
+                            </div>
+                            <div class="alert alert-secondary alert-dismissible fade show" role="alert" *ngIf="removebilling">
+
+                                <span class="alert-text"><strong>{{pastebilling.name}},{{pastebilling.phone_number}}</strong></span>
+                                <p>{{pastebilling.address_line1}} {{pastebilling.address_line2}}, {{pastebilling.landmark}}, {{pastebilling.city}}, {{pastebilling.pincode}}</p>
+                                <button (click)="openBillingModal()" type="button" class="btn btn-outline-primary">
+                                             Change
+                                            </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+
+                        <div class="col-md-10">
+                            <button type="submit" class="btn btn-primary" (click)="place_order()">PLACE ORDER</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
