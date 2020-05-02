@@ -1,0 +1,32 @@
+<div class="header bg-success pb-8 pt-5 pt-md-8">
+    <div class="container-fluid">
+        <div class="header-body">
+            <!-- Card stats -->
+
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid mt--7">
+
+    <div class=" card">
+
+        <div class=" card-header">
+            <h3 class=" mb-0">LEGAL ENTITIES</h3>
+        </div>
+        <div class=" card-body p-0">
+            <ul class=" list-group list-group-flush" data-toggle="checklist">
+                <li class=" checklist-entry list-group-item flex-column align-items-start py-4 px-4" *ngFor="let data of entity">
+                    <div class=" checklist-item checklist-item-success">
+                        <div class=" checklist-info">
+                            <h4 class=" checklist-title mb-0"><a [routerLink]="['/legal-entity/',data.id]">{{data.legal_name}}</a></h4><small>{{data.created | dateTime}}</small></div>
+                        <div>
+                            <div class=" custom-control custom-checkbox custom-checkbox-success" *ngIf="data.kyc_done == 1"><input checked="checked" class=" custom-control-input" id="chk-todo-task-1" type="checkbox" disabled><label class=" custom-control-label" for="chk-todo-task-1">Verified</label></div>
+                        </div>
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</div>

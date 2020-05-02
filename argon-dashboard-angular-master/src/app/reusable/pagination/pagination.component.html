@@ -1,0 +1,13 @@
+<nav aria-label="...">
+    <ul class="pagination justify-content-end mb-0">
+
+        <li *ngFor="let page of pages; let i = index" class="page-item">
+            <a class="page-link" href="javascript:void(0)" *ngIf="page.active == true && !page.disable" (click)='onSelect(page.no)' style="background-color: #5e72e4;
+            color: #fff;">{{page.page}}</a>
+            <a class="page-link" href="javascript:void(0)" *ngIf="page.active != true && !page.disable" (click)='onSelect(page.no)'>{{page.page}}</a>
+
+            <a class="page-link" href="javascript:void(0)" *ngIf="page.active == true && page.disable" (click)='onSelect(page.no)'>{{page.page}}</a>
+            <a class="page-link" href="javascript:void(0)" *ngIf="page.active != true && page.disable" (click)='onSelect(page.no)'>{{page.page}}</a>
+        </li>
+    </ul>
+</nav>

@@ -1,0 +1,56 @@
+<div class="header bg-primary pb-8 pt-5 pt-md-8">
+    <div class="container-fluid ">
+        <div class="header-body ">
+            <!-- Card stats -->
+
+        </div>
+    </div>
+</div>
+<div class=" container-fluid mt--6 col-lg-6">
+    <div class=" row">
+        <div class=" col">
+            <div class=" card">
+                <div class=" card-header border-0">
+                    <h3 class=" mb-0">You have following saved orders:</h3>
+                </div>
+                <div class=" table-responsive" id="first-list">
+                    <table class=" table align-items-center table-flush">
+                        <thead class=" thead-light">
+                            <tr>
+                                <th class=" sort" data-sort="name" scope="col">Order ID</th>
+
+                                <th class=" sort" data-sort="status" scope="col">Status</th>
+                                <th scope="col">Created On</th>
+
+                            </tr>
+                        </thead>
+                        <tbody class=" list">
+                            <tr [routerLink]="'/orders/detail/'+orderdet.id+'/'" *ngFor="let orderdet of order">
+                                <th scope="row">
+                                    <div class=" media align-items-center">
+                                        <a class=" avatar rounded-circle mr-3" href="javascript:void(0)"><img alt="Image placeholder" src="assets/img/brand/diesel.png"></a>
+                                        <div class=" media-body"><span class=" name mb-0 text-sm">{{orderdet?.id}}</span></div>
+                                    </div>
+                                </th>
+
+                                <td><span class=" badge badge-dot mr-4"><i class=" bg-warning"></i><span class=" status"> pending </span></span>
+                                </td>
+
+                                <td>
+                                    <div class=" d-flex align-items-center"><span class=" completion mr-2"> {{orderdet?.date_added}}</span>
+
+                                    </div>
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class=" card-footer py-4">
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

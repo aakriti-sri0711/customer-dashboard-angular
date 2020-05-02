@@ -1,0 +1,159 @@
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+    <div class="container-fluid">
+        <div class="header-body">
+            <!-- Card stats -->
+
+        </div>
+    </div>
+</div>
+
+
+
+<div class="container-fluid mt--7">
+    <div class="row">
+        <div class="col-lg-8 align-center">
+            <!-- <div class="card shadow border-0">
+                <div id="map-canvas" class="map-canvas" data-lat="40.748817" data-lng="-73.985428" style="height: 600px;"></div>
+                
+            </div> -->
+            <div class=" card text-center">
+                <div class=" card-header bg-transparent">
+                    <h4 class=" text-uppercase ls-1 text-primary py-3 mb-0">
+                        <h3 class=" heading-title text-warning mb-0">Create Asset</h3>
+                    </h4>
+                </div>
+                <div class=" card-body">
+                    <form [formGroup]="assetForm" (submit)="save(assetForm.value)">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <mat-form-field>
+                                        <mat-label>Asset Number</mat-label>
+                                        <input matInput placeholder="Enter asset number" [type]="text" formControlName="number">
+
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <mat-form-field>
+                                        <mat-label>Select Legal Entity</mat-label>
+
+                                        <mat-select formControlName="legal_entity_id">
+                                            <mat-option *ngFor="let role of entity" [value]="role.id">
+                                                {{role.legal_name | uppercase}}
+                                            </mat-option>
+                                        </mat-select>
+
+                                    </mat-form-field>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <mat-form-field>
+                                        <mat-label>Select Asset Type</mat-label>
+                                        <mat-select formControlName="asset_type_id" (selectionChange)="checkTypeAsset($event)">
+                                            <mat-option *ngFor="let role of asset_types" [value]="role.id">
+                                                {{role.name | uppercase}}
+                                            </mat-option>
+                                            <mat-option [value]="0">OTHER</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="col-lg-6" *ngIf="checkType">
+                                <div class="form-group">
+                                    <mat-form-field>
+                                        <mat-label>Please specify your asset type</mat-label>
+                                        <input required matInput placeholder="Other asset type" [type]="text" formControlName="other_type" class="example-right-align">
+
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <mat-form-field>
+                                        <mat-label>Select Asset Company</mat-label>
+                                        <mat-select formControlName="asset_company_id" (selectionChange)="checkCompanyTypeAsset($event)">
+                                            <mat-option *ngFor="let role of asset_company" [value]="role.id">
+                                                {{role.name | uppercase}}
+                                            </mat-option>
+                                            <mat-option [value]="0">OTHER</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group" *ngIf="companyType">
+                                    <mat-form-field>
+                                        <input matInput placeholder="Other company" type="text" formControlName="other_company" class="example-right-align">
+
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <mat-form-field>
+                                        <mat-label>Maximum Capacity</mat-label>
+                                        <input matInput placeholder="Capacity in Litres" type="text" formControlName="maximum_capacity" class="example-right-align">
+
+                                    </mat-form-field>
+                                </div>
+
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <mat-form-field>
+                                        <mat-label>Asset Maker Number</mat-label>
+                                        <input matInput placeholder="enter number" type="text" formControlName="asset_maker_number" class="example-right-align">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <mat-form-field>
+                                        <mat-label>Location</mat-label>
+                                        <mat-select formControlName="location_id">
+                                            <mat-option *ngFor="let role of location" [value]="role.id">
+                                                {{role.name | uppercase}}
+                                            </mat-option>
+                                        </mat-select>
+
+                                    </mat-form-field>
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <div class="row ">
+                            <div class="col-lg-12 text-center">
+                                <button class=" btn btn-warning" type="submit">Save Changes</button>
+                                <div style="margin-top:5px" role="alert" *ngIf="msg" class="alert alert-success alert-dismissible">
+                                    <button aria-label="Close" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button><span class=" alert-icon"><i class=" ni ni-like-2"></i></span><span class=" alert-text"><strong> Added Successfully </strong> </span></div>
+                            </div>
+
+
+                        </div>
+
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="loading" *ngIf="loading">
+        <div class="loader"></div>
+    </div>

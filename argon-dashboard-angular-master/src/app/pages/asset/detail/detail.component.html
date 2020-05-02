@@ -1,0 +1,52 @@
+<div class="header bg-primary pb-8 pt-5 pt-md-8">
+    <div class="container-fluid">
+        <div class="header-body">
+            <!-- Card stats -->
+
+        </div>
+    </div>
+</div>
+<div class="container-fluid mt--7">
+    <!-- Table -->
+    <div class="row">
+        <div class="col">
+
+            <div class="card shadow">
+
+                <div class="table-responsive">
+                    <table class="table align-items-center table-flush">
+                        <thead class="thead-light">
+                            <tr class="active">
+                                <th scope="col">Order ID</th>
+                                <th scope="col">Supply ID </th>
+                                <th scope="col">Quantity</th>
+
+                                <th scope="col">Date Added</th>
+                                <th scope="col">Tank Reading </th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor='let d of data;  let i = index'>
+
+                                <td>{{d?.order_id}}</td>
+                                <td>{{d?.order_supply_id}}</td>
+                                <td>{{d?.quantity}}</td>
+                                <td>{{d.date_added}}</td>
+                                <td>{{d?.tank_reading}}</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer py-4">
+
+                    <app-pagination [pages]='pages' (pagenumber)='selecPage($event)'></app-pagination>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <app-pagination></app-pagination> -->

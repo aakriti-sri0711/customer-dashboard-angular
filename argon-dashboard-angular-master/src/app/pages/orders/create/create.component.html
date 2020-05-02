@@ -1,0 +1,167 @@
+<div class="header bg-primary pb-8 pt-5 pt-md-8">
+    <div class="container-fluid ">
+        <div class="header-body ">
+            <!-- Card stats -->
+
+        </div>
+    </div>
+</div>
+<div class="container-fluid mt--7">
+
+    <div class="card-wrapper">
+        <!-- Form controls -->
+        <div class="card">
+            <!-- Card header -->
+            <div class="card-header">
+                <h3 class="mb-0">Create Order<small><i> (Fields with * are required)</i></small></h3>
+            </div>
+            <!-- Card body -->
+            <div class="card-body">
+                <form [formGroup]="orderForm">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+
+                                <label class="form-control-label" for="exampleFormControlInput1">City</label>
+                                <div *ngFor="let c of cities">
+
+                                    <input class=" form-control col-lg-7" *ngIf="c.id == address?.city_id" [value]="c.name | uppercase" readonly>
+                                    <input *ngIf="c.id == address?.city_id" type="hidden" formControlName="city_id" [value]="c.id">
+
+                                </div>
+
+                            </div>
+                            <div class="form-group">
+
+                            </div>
+                            <div class="form-group row" *ngFor='let item of product; let i = index'>
+
+                                <div class="col-md-10">
+                                    <mat-form-field>
+                                        <mat-label>Product</mat-label>
+                                        <mat-select formControlName="product">
+                                            <mat-option [value]="productLabel[i]?.name"> {{productLabel[i]?.name | uppercase}}</mat-option>
+
+                                        </mat-select>
+
+                                    </mat-form-field>
+                                    <input class="form-control" [value]="item.id" type="hidden" name="id" formControlName="id" placeholder="Product">
+                                    <!-- <label for="example-number-input" class="col-form-label form-control-label">Quantity <sup class="required">*</sup></label> -->
+
+                                    <!-- <input class="form-control" type="text" (blur)="checkQFormValues()" formControlName="quantity" (keyup)="setQt(i, false)" placeholder="In Litres" required> -->
+                                    <mat-form-field>
+                                        <mat-label>Quantity</mat-label>
+                                        <input required matInput appPositiveNumbers appTwoDigitDecimaNumber placeholder="Enter quantity in litres" type="text" formControlName="quantity" (keyup)="setQt(i, false)" class="example-right-align">
+
+                                    </mat-form-field>
+                                    <!-- <div *ngIf="quantityError" class="form-control-error"><small>Quantity is required</small></div> 
+                                    -->
+                                    <mat-error *ngIf="orderForm.get('quantity').hasError('required')">
+                                        Quantity is Required!
+                                    </mat-error>
+                                    <mat-error *ngIf="orderForm.get('quantity').hasError('max')">
+                                        Quantity allowed upto 1000 L only
+                                    </mat-error>
+
+                                    <!-- <label for="example-number-input" class="col-md-2 col-form-label form-control-label">Amount</label> -->
+                                    <input class="form-control" type="hidden" formControlName="amount" (keyup)="setQt(i, true)" placeholder="">
+                                    <!-- <label for="example-number-input" class="col-md-2 col-form-label form-control-label">Rate</label> -->
+                                    <input class="form-control" type="hidden" [value]="item.rate" formControlName="rate" placeholder="">
+                                    <!-- <label for="example-number-input" class="col-md-2 col-form-label form-control-label">D.C</label> -->
+                                    <input class="form-control" type="hidden" formControlName="delivery_charge" (keyup)="setQt(i, true)" placeholder="">
+                                    <!-- <label for="example-number-input" class="col-md-2 col-form-label form-control-label">Tax</label> -->
+                                    <input class="form-control" type="hidden" formControlName="tax" (keyup)="setQt(i, true)" placeholder="">
+                                    <!-- <label for="example-number-input" class="col-md-2 col-form-label form-control-label">Discount</label> -->
+                                    <input class="form-control" type="hidden" formControlName="discount" placeholder="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <mat-form-field>
+                                    <mat-label>Choose Payment Mode</mat-label>
+                                    <mat-select (blur)="checkPFormValues()" formControlName="payment_method" required>
+                                        <mat-option value="1">Cash On Delivery</mat-option>
+                                        <mat-option value="2">CHEQUE</mat-option>
+                                        <mat-option value="3">CARD</mat-option>
+                                        <mat-option value="4">ONLINE</mat-option>
+                                        <mat-option value="5">Cheque On Delivery</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                                <!-- <div *ngIf="paymentError" class="form-control-error"><small>Please select payment mode</small></div> -->
+                            </div>
+                            <div class="form-group">
+                                <!-- <label class="form-control-label" for="exampleFormControlTextarea1">Delivery Date <sup class="required">*</sup></label>
+                                <my-date-picker required formControlName="delivery_date" (blur)="checkFormValues()" [options]="myDatePickerOptions" (dateChanged)="onDateChanged($event)"></my-date-picker> -->
+                                <mat-form-field>
+                                    <mat-label>Choose a date</mat-label>
+                                    <input matInput [min]="minDate" formControlName="delivery_date" [matDatepicker]="picker" (dateChange)="onDateChanged($event)" required>
+                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker></mat-datepicker>
+                                </mat-form-field>
+                            </div>
+                            <div>
+                                <label class="form-control-label" for="exampleFormControlTextarea1" *ngIf="showTimePicker">Select Time Range(HH:MM) <sup class="required">*</sup></label>
+                                <div class="form-group row" *ngIf="showTimePicker">
+
+                                    <label for="example-time-input" class="col-md-2 col-form-label form-control-label">Time from</label>
+                                    <div class="col-md-10 row custom-timepicker">
+                                        <!-- <input class="form-control" type="time" value="10:00:00" id="example-time-input" formControlName="min_time"> -->
+                                        <mat-form-field class=" col-md-2">
+                                            <mat-select formControlName="min_hour" required>
+                                                <mat-option *ngFor="let option of hoursoptions; let i = index" [value]="option">{{option}}</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+
+                                        <mat-form-field class=" col-md-2">
+                                            <mat-select formControlName="min_min" required>
+                                                <ng-container *ngFor="let option of minoptions; let i = index">
+                                                    <mat-option *ngIf="option == 0" [value]="00">00</mat-option>
+                                                    <mat-option *ngIf="option != 0" [value]="option">{{option}}</mat-option>
+                                                </ng-container>
+                                                <!-- <option *ngFor="let option of minoptions; let i = index" [value]="option">{{option}}</option> -->
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <div class="form-group row" *ngIf="showTimePicker">
+                                    <label for="example-time-input" class="col-md-2 col-form-label form-control-label">Time To</label>
+                                    <div class="col-md-10 row custom-timepicker">
+
+                                        <mat-form-field class=" col-md-2">
+                                            <mat-select formControlName="max_hour" required>
+                                                <mat-option *ngFor="let option of hoursoptions; let i = index" [value]="option">{{option}}</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                        <mat-form-field class=" col-md-2">
+                                            <mat-select formControlName="max_min" required>
+                                                <mat-option *ngFor="let option of minutesoptions; let i = index" [value]="option">{{option}}</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                        <!-- <input class="form-control" type="time" value="21:00:00" id="example-time-input" formControlName="max_time"> -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-10">
+                                    <button type="button" (click)="save()" [disabled]="!orderForm.valid" class="btn btn-primary">SAVE & NEXT</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </form>
+                <!-- <button class="btn btn-primary" (click)='addProduct()'>Product
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+                <button class="btn btn-primary" (click)='removeProduct()'>Last Product
+                        <span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button> -->
+            </div>
+        </div>
+        <!-- HTML5 inputs -->
+
+    </div>
+</div>
+<div class="loading" *ngIf="loading">
+    <div class="loader"></div>
+</div>

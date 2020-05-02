@@ -1,0 +1,65 @@
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+    <div class="container-fluid">
+        <div class="header-body">
+            <!-- Card stats -->
+
+        </div>
+    </div>
+</div>
+<div class="container-fluid mt--7">
+    <!-- Table -->
+    <div class="row">
+        <div class="col">
+            <div class="order timeline-content">
+                <div class="d-flex justify-content-between pt-1">
+                    <div>
+                        <span class="text-muted text-sm font-weight-bold">Total Delivered : {{customerData?.bought || '0' | number}} Litres</span>
+                    </div>
+                    <div class="text-right">
+                        <button class="btn btn-icon btn-secondary" type="button" (click)="create()">
+                                    <span class="btn-inner--icon"><i class="ni ni-bag-17"></i></span>
+                                    <span class="btn-inner--text">Create Order</span>
+                                  </button>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="card shadow">
+
+                <div class="table-responsive">
+                    <table class="table align-items-center table-flush">
+                        <thead class="thead-light">
+                            <tr class="active">
+                                <th scope="col">#</th>
+                                <th scope="col">Order Id</th>
+                                <th scope="col">Date Added</th>
+                                <th scope="col">Time</th>
+                                <th scope="col">Delivery Date</th>
+                                <th scope="col">Ordered Quantity Ltr</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngFor="let order of data; let i = index">
+                            <tr tstyle=" background: antiquewhite; outline: 1px solid #00000038 !important;" [routerLink]="'/orders/detail/'+order.id+'/'" style="cursor: pointer;">
+                                <td>{{i+1}}</td>
+                                <td>{{order?.id}}</td>
+                                <td>{{order?.date_added | dateTime:'Y-MM-DD'}}</td>
+                                <td>{{order?.date_added | dateTime:'hh:mm A'}}</td>
+                                <td>{{order?.delivery_date | dateTime:'Y-MM-DD'}}</td>
+                                <td>{{ifDelivered(order?.customer_tank_filling_details) > 0 ? ifDelivered(order?.customer_tank_filling_details)+'*' : order?.order_details[0].quantity}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer py-4">
+
+                    <app-pagination [pages]='pages' (pagenumber)='selecPage($event)'></app-pagination>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <app-pagination></app-pagination> -->
